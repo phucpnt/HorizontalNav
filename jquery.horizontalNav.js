@@ -116,7 +116,12 @@
                     // Cycle through the list items and give them widths
                     li.each(function(index) {
                         var li_width = trueInnerWidth( $(this) );
-                        $(this).css({ 'width' : (li_width + li_padding) + 'px' });
+                        if(o.animation){
+                            $(this).animate({ 'width' : (li_width + li_padding) + 'px' }, 200);
+                        }
+                        else{
+                            $(this).css({ 'width' : (li_width + li_padding) + 'px' });
+                        }
                     });
 
                     // Get the leftover pixels after we set every itms width
@@ -127,8 +132,13 @@
                         li_last_width = li_last_width - 1;
                     }
                     // Add the leftovers to the last navigation item
-                    li_last.css({ 'width' : li_last_width + 'px' });
-
+                    if(o.animation)
+                    {
+                        li_last.animate({ 'width' : (li_width + li_padding) + 'px' }, 200);
+                    }
+                    else{
+                        li_last.css({ 'width' : li_last_width + 'px' });
+                    }
                 } else {
                     // Every modern browser supports the "display: table" method
                     // so this is the best way to do it for them.
@@ -146,7 +156,8 @@
         responsive : true,
         responsiveDelay : 100,
         tableDisplay : true,
-        minimumItems : 0
+        minimumItems : 0,
+        animation: false,
     };
 
 })(jQuery);
